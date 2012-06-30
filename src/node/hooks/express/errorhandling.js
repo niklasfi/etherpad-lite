@@ -17,7 +17,7 @@ exports.gracefulShutdown = function(err) {
   console.log("graceful shutdown...");
 
   //stop the http server
-  exports.app.close();
+  //exports.app.close();
 
   //do the db shutdown
   db.db.doShutdown(function() {
@@ -35,7 +35,7 @@ exports.gracefulShutdown = function(err) {
 exports.expressCreateServer = function (hook_name, args, cb) {
   exports.app = args.app;
 
-  args.app.error(function(err, req, res, next){
+  args.app.use(function(err, req, res, next){
     res.send(500);
     console.error(err.stack ? err.stack : err.toString());
     exports.gracefulShutdown();

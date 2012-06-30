@@ -44,7 +44,7 @@ CachingMiddleware.prototype = new function () {
     var old_req = {};
     var old_res = {};
 
-    var supportsGzip =
+    var supportsGzip = req.header('Accept-Enclding','') &&
         req.header('Accept-Encoding', '').indexOf('gzip') != -1;
 
     var path = require('url').parse(req.url).path;
